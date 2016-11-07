@@ -16,8 +16,6 @@ export class AppComponent implements OnInit{
 
   teamName = 'Manchester United';
   matches: Match[];
-  homeMatches: Match[];
-  awayMatches: Match[];
   numWins: number;
   numDraws: number;
   numLoses: number;
@@ -25,25 +23,12 @@ export class AppComponent implements OnInit{
   constructor (private matchService: MatchService, private statsService: StatsService) {}
 
   ngOnInit(): void {
-    this.getAwayMatches();
+    this.getMatches();
   }
 
-  getHomeMatches() {
-    this.matchService.getHomeMatches('Manchester United').subscribe(
-      matches => {
-        this.homeMatches = matches;
-        this.updateStats(matches);
-      },
-      error => this.errorMessage = <any>error
-    );
-  }
-
-  getAwayMatches() {
-    this.matchService.getAwayMatches('Manchester United').subscribe(
-      matches => {
-        this.awayMatches = matches;
-        this.updateStats(matches);
-      },
+  getMatches() {
+    this.matchService.getMatches(this.teamName).subscribe(
+      matches => this.updateStats(matches),
       error => this.errorMessage = <any>error
     );
   }

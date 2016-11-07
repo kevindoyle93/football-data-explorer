@@ -7,19 +7,12 @@ import {Response, Http} from "@angular/http";
 @Injectable()
 export class MatchService {
 
-  private matchesUrl = 'http://127.0.0.1:8000/api/matches/';  // URL to web API
+  private matchesUrl = 'http://127.0.0.1:8000/api/teams/4914/matches';  // URL to web API
 
   constructor (private http: Http) {}
 
-  getHomeMatches (team: string): Observable<Match[]> {
-    let url = this.matchesUrl + '?home_team=' + team;
-    return this.http.get(url)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
-  getAwayMatches (team: string): Observable<Match[]> {
-    let url = this.matchesUrl + '?away_team=' + team;
+  getMatches (team: string): Observable<Match[]> {
+    let url = this.matchesUrl;
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
@@ -27,7 +20,7 @@ export class MatchService {
 
   private extractData(res: Response) {
     let body = res.json();
-    return body.results || { };
+    return body || { };
   }
 
   private handleError (error: Response | any) {
