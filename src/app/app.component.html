@@ -7,5 +7,11 @@
 
   <md-card class="team-card">
     <md-card-title>Results</md-card-title>
+    <md-card-content>
+      Full time results:
+      <ul>
+        <li *ngFor="let match of matches">{{match.full_time_result}}</li>
+      </ul>
+    </md-card-content>
   </md-card>
 </div>

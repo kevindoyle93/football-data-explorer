@@ -24,7 +24,7 @@ export class AppComponent implements OnInit{
 
   getMatches() {
     this.matchService.getMatches().subscribe(
-      matches => this.matches,
+      matches => this.matches = matches,
       error => this.errorMessage = <any>error
     );
   }
@@ -50,6 +50,8 @@ export class Match {
   away_corners: number;
   home_fouls_committed: number;
   away_fouls_committed: number;
+  home_offsides: number;
+  away_offsides: number;
   home_yellow_cards: number;
   away_yellow_cards: number;
   home_red_cards: number;

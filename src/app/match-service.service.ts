@@ -18,7 +18,6 @@ export class MatchService {
   }
 
   private extractData(res: Response) {
-    console.log(res.json());
     let body = res.json();
     return body.results || { };
   }
