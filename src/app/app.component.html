@@ -8,9 +8,19 @@
   <md-card class="team-card">
     <md-card-title>Results</md-card-title>
     <md-card-content>
-      Full time results:
+      <div class="row">
+        <div class="col-md-4">
+          Wins
+        </div>
+        <div class="col-md-4">
+          Draws
+        </div>
+        <div class="col-md-4">
+          Loses
+        </div>
+      </div>
       <ul>
-        <li *ngFor="let match of matches">{{match.full_time_result}}</li>
+        <li *ngIf="matches">{{matches.length}}</li>
       </ul>
     </md-card-content>
   </md-card>
