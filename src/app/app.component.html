@@ -10,18 +10,18 @@
     <md-card-content>
       <div class="row">
         <div class="col-md-4">
+          <span *ngIf="matches">{{numWins}}</span><br />
           Wins
         </div>
         <div class="col-md-4">
+          <span *ngIf="matches">{{numDraws}}</span><br />
           Draws
         </div>
         <div class="col-md-4">
+          <span *ngIf="matches">{{numLoses}}</span><br />
           Loses
         </div>
       </div>
-      <ul>
-        <li *ngIf="matches">{{matches.length}}</li>
-      </ul>
     </md-card-content>
   </md-card>
 </div>

@@ -6,6 +6,7 @@ import { HttpModule, JsonpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { MatchService } from "./match-service.service";
+import { StatsService } from './stats/stats.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { MatchService } from "./match-service.service";
     HttpModule,
     JsonpModule
   ],
-  providers: [MatchService],
+  providers: [MatchService, StatsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

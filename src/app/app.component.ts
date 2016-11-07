@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatchService} from "./match-service.service";
+import {StatsService} from './stats/stats.service';
 
 import "./rxjs-operators";
 
@@ -15,18 +16,43 @@ export class AppComponent implements OnInit{
 
   teamName = 'Manchester United';
   matches: Match[];
+  homeMatches: Match[];
+  awayMatches: Match[];
+  numWins: number;
+  numDraws: number;
+  numLoses: number;
 
-  constructor (private matchService: MatchService) {}
+  constructor (private matchService: MatchService, private statsService: StatsService) {}
 
   ngOnInit(): void {
-    this.getMatches();
+    this.getAwayMatches();
   }
 
-  getMatches() {
-    this.matchService.getMatches().subscribe(
-      matches => this.matches = matches,
+  getHomeMatches() {
+    this.matchService.getHomeMatches('Manchester United').subscribe(
+      matches => {
+        this.homeMatches = matches;
+        this.updateStats(matches);
+      },
       error => this.errorMessage = <any>error
     );
+  }
+
+  getAwayMatches() {
+    this.matchService.getAwayMatches('Manchester United').subscribe(
+      matches => {
+        this.awayMatches = matches;
+        this.updateStats(matches);
+      },
+      error => this.errorMessage = <any>error
+    );
+  }
+
+  updateStats(matches: Match[]) {
+    this.matches = matches;
+    this.numWins = this.statsService.getNumberOfWins(matches);
+    this.numDraws = this.statsService.getNumberOfDraws(matches);
+    this.numLoses = this.statsService.getNumberOfLoses(matches);
   }
 }
 
